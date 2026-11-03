@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: noel-inscriptions-api
+    env: node
+    region: frankfurt        # plus proche de la Suisse
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    disk:
+      name: data
+      mountPath: /app/data   # SQLite persiste ici
+      sizeGB: 1
+    envVars:
+      - key: DB_PATH
+        value: /app/data/inscriptions.db
+      - key: GMAIL_USER
+        sync: false          # à renseigner dans le dashboard Render
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false          # mettre Viiillaz2026 ou autre
+      - key: NODE_ENV
+        value: production
